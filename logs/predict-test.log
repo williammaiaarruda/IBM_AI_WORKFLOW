@@ -1,0 +1,4 @@
+unique_id,timestamp,y_pred,y_proba,query,model_version,runtime
+210df573-85a4-475a-965b-d0c4ec14aa12,1616101990.8965957,united_kingdom,[0],None,2021-01-01,0.1,00:00:02
+6b8efa4a-8f47-4f8a-bc9a-ff622e9dd124,1616101990.8970919,united_kingdom,[0],None,2021-01-01,0.1,00:00:02
+f80f9ad2-aa58-4b96-b5d8-cf0d39d924f3,1616102021.5670905,all,[357009.4085],None,2019-11-30,0.1,000:00:00

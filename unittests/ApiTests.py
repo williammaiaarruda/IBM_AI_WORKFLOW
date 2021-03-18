@@ -64,27 +64,6 @@ class ApiTest(unittest.TestCase):
     @unittest.skipUnless(server_available,"local server is not running")
     def test_03_predict(self):
         """
-        test the predict functionality
-        """
-
-        query_data = {'country': 'all',
-                 'year': '2020',
-                 'month': '01',
-                 'day': '05'
-                 }
-
-        query_type = 'dict'
-        request_json = {'query': query_data, 'type': query_type, 'mode': 'test'}
-
-        r = requests.post('http://127.0.0.1:{}/predict'.format(port), json=request_json)
-        response = literal_eval(r.text)
-
-        for p in response['y_pred']:
-            self.assertTrue(p >= -432.4092325822826)
-
-    @unittest.skipUnless(server_available, "local server is not running")
-    def test_04_logs(self):
-        """
         test the log functionality
         """
 

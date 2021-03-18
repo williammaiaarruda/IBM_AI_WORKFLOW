@@ -73,12 +73,13 @@ class LoggerTest(unittest.TestCase):
         
         # update the log
         y_pred = [0]
+        y_proba = None
         runtime = "00:00:02"
         model_version = 0.1
         country = 'united_kingdom'
         target_date = "2021-01-01"
 
-        update_predict_log(country, y_pred, target_date, runtime,
+        update_predict_log(country, y_pred, y_proba, target_date, runtime,
                            model_version, test=True)
         
         self.assertTrue(os.path.exists(log_file))
@@ -93,11 +94,12 @@ class LoggerTest(unittest.TestCase):
         # update the log
         country = 'united_kingdom'
         y_pred = [0]
+        y_proba = None
         runtime = "00:00:02"
         model_version = 0.1
         target_date = "2021-01-01"
 
-        update_predict_log(country, y_pred, target_date, runtime,
+        update_predict_log(country, y_pred, y_proba, target_date, runtime,
                            model_version, test=True)
 
         df = pd.read_csv(log_file)

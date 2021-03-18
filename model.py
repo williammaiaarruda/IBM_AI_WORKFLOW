@@ -21,8 +21,6 @@ from logger import update_predict_log, update_train_log
 MODEL_DIR = "models"
 MODEL_VERSION = 0.1
 MODEL_VERSION_NOTE = "learning model for time-series"
-MONITORING_DIR = "monitoring"
-
 
 def _model_train(df,tag,test=False):
     """
@@ -55,7 +53,8 @@ def _model_train(df,tag,test=False):
     ## train a random forest model
     param_grid_rf = {
     'rf__criterion': ['mse','mae'],
-    'rf__n_estimators': [10,15,20,25]
+    'rf__n_estimators': [10,15,20,25],
+    'rf__max_depth': [5,10,15]
     }
 
     pipe_rf = Pipeline(steps=[('scaler', StandardScaler()),
@@ -65,7 +64,9 @@ def _model_train(df,tag,test=False):
     grid.fit(X_train, y_train)
     y_pred = grid.predict(X_test)
     eval_rmse =  round(np.sqrt(mean_squared_error(y_test,y_pred)))
-    
+    eval_mae =  mean_absolute_error(y_test, y_pred)
+    eval_r2_score = r2_score(y_test, y_pred)
+
     ## retrain using all data
     grid.fit(X, y)
 
@@ -79,10 +80,6 @@ def _model_train(df,tag,test=False):
                                    "sl-{}-{}.joblib".format(tag,model_name))
         print("... saving model: {}".format(saved_model))
 
-        print("... saving latest data")
-        data_file = os.path.join(MONITORING_DIR, "latest-train-{}-{}.joblib".format(tag, model_name))
-        with open(data_file, 'wb') as tmp:
-            joblib.dump({'data': df}, tmp)
 
     joblib.dump(grid, saved_model)
 
@@ -91,7 +88,9 @@ def _model_train(df,tag,test=False):
     runtime = "%03d:%02d:%02d"%(h, m, s)
 
     # update log
-    update_train_log(tag,{'rmse': eval_rmse},runtime,
+    eval_metrics = {'rmse': eval_rmse, 'mae': eval_mae, 'r2_score': eval_r2_score}
+    print(eval_metrics)
+    update_train_log(tag,eval_metrics,runtime,
                      MODEL_VERSION, MODEL_VERSION_NOTE, test=True)
 
 
@@ -177,7 +176,7 @@ def clean_data(df):
     
     return(df)
 
-def model_predict(query, all_models=None, test=False):
+def model_predict(query, data=None, model=None, test=False):
     """
     example funtion to predict from model
     """
@@ -190,27 +189,9 @@ def model_predict(query, all_models=None, test=False):
     # start timer for runtime
     time_start = time.time()
 
-    ## load model if needed
-    if not all_models:
-        all_data, all_models = model_load(training=False)
-
-    # load data
-    data_dir = os.path.join("data", "cs-train")
-    di = DataIngestion()
-    ts_data = di.fetch_ts(data_dir)
-    data = ts_data[country]
-
-    # input checks
-    if country not in all_models.keys():
-        raise Exception("ERROR (model_predict) - model for country '{}' could not be found".format(country))
-
     for d in [year,month,day]:
         if re.search("\D",d):
             raise Exception("ERROR (model_predict) - invalid year, month or day")
-
-    # load data
-    model = all_models[country]
-    data = all_data[country]
 
     target_date = "{}-{}-{}".format(year,str(month).zfill(2),str(day).zfill(2))
 
@@ -252,20 +233,27 @@ if __name__ == "__main__":
 
     # train the model
     print("TRAINING MODELS")
-    data_dir = os.path.join("data", "cs-train")
-    model_train(data_dir, test=True)
+    train_data_dir = os.path.join("data", "cs-train")
+    model_train(train_data_dir, test=True)
 
-    # load the model
+    # load the data/model
     print("LOADING MODELS")
-    all_data, all_models = model_load()
+    production_data_dir = os.path.join("data", "cs-production")
+    all_data, all_models = model_load(data_dir=production_data_dir)
     print("... models loaded: ",",".join(all_models.keys()))
 
     # test predict
-    query = {'country': 'all',
-             'year': '2018',
-             'month': '01',
-             'day': '05'
+    country = 'all'
+    query = {'country': country,
+             'year': '2019',
+             'month': '11',
+             'day': '30'
              }
 
-    result = model_predict(query)
+    # input checks
+    if country not in all_models.keys():
+        result = "ERROR (model_predict) - model for country '{}' could not be found".format(country)
+    else:
+        result = model_predict(query, data=all_data[country], model=all_models[country], test=True)
+   
     print(result)

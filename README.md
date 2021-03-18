@@ -1,4 +1,4 @@
-# AIEnterpriseWF
+# IBM_AI_WORKFLOW
 Capstone Project for IBM AI Enterprise Workflow
 
 ## Usage Notes
@@ -107,7 +107,7 @@ Does the data ingestion exists as a function or script to facilitate automation?
 /model/cslib.py
 
 Where multiple models compared?
-/notebooks/Capstone_Comparison.py
+/notebooks/AAVAIL_Modelling.py
 
 Did the EDA investigation use visualizations?
 /notebooks/AAVAIL_EDA.ipynb

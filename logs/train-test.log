@@ -1,0 +1,18 @@
+unique_id,timestamp,x_shape,eval_test,model_version,model_version_note,runtime
+59317cf1-d616-4423-a8c4-970e40b88a46,1616101990.892627,united_kingdom,{'rmse': 0.5},0.1,test model,00:00:01
+5a42d4b7-f26a-4cae-abf1-fed128c81adf,1616101990.8931231,united_kingdom,{'rmse': 0.5},0.1,test model,00:00:01
+86757053-b831-4656-8688-a67ed71ac73e,1616101996.1715572,all,"{'rmse': 38084, 'mae': 27420.07655515659, 'r2_score': 0.7725154788120351}",0.1,learning model for time-series,000:00:05
+95c88259-5d30-4e03-8fa9-1928d917dd77,1616101999.705345,united_kingdom,"{'rmse': 32773, 'mae': 22611.972949841274, 'r2_score': 0.8015686684531375}",0.1,learning model for time-series,000:00:03
+5837c6a6-1caf-43a5-87b5-af48c6da54bd,1616102059.9223754,all,"{'rmse': 74928, 'mae': 36964.987292424245, 'r2_score': 0.38384613876431406}",0.1,learning model for time-series,000:00:03
+54d8a68f-0bc3-40d2-accd-7431c92a5b68,1616102063.1979601,united_kingdom,"{'rmse': 30140, 'mae': 17935.39408295624, 'r2_score': 0.8370227490162135}",0.1,learning model for time-series,000:00:03
+a6e71145-a37c-4bc3-bc02-a5d4e57475b9,1616102087.8835595,all,"{'rmse': 28320, 'mae': 16036.806486766722, 'r2_score': 0.8953244274295793}",0.1,learning model for time-series,000:00:05
+f9a8050f-e9bf-46bb-99a7-b562ef6aa74d,1616102093.2830317,eire,"{'rmse': 1160, 'mae': 674.2286612696803, 'r2_score': 0.912573605940824}",0.1,learning model for time-series,000:00:05
+98202a3b-9e06-412d-90c2-d8691daadfce,1616102098.8174117,france,"{'rmse': 638, 'mae': 369.74815000000007, 'r2_score': 0.7001348599719964}",0.1,learning model for time-series,000:00:05
+cd9109e6-e0e6-4d14-931d-fde896a6c954,1616102104.8998845,germany,"{'rmse': 458, 'mae': 316.6592002298851, 'r2_score': 0.7968783577043521}",0.1,learning model for time-series,000:00:06
+c39ac9ee-90eb-4ee3-ae1f-2e8eeeac11c3,1616102107.528635,hong_kong,"{'rmse': 1015, 'mae': 403.4927364000266, 'r2_score': 0.7863210765168038}",0.1,learning model for time-series,000:00:02
+ec32fbb7-e410-4e1e-a3bd-53d77237b360,1616102112.5288944,netherlands,"{'rmse': 124, 'mae': 74.89757192791994, 'r2_score': 0.8645257489651259}",0.1,learning model for time-series,000:00:04
+e1a5dbf2-15ef-4817-9d5f-23f206b0c1b4,1616102115.960223,norway,"{'rmse': 280, 'mae': 89.51531043238693, 'r2_score': 0.6526905922969224}",0.1,learning model for time-series,000:00:03
+c12cabc5-c035-4f11-a135-a92a9c1e735c,1616102121.0179358,portugal,"{'rmse': 342, 'mae': 128.17148000000006, 'r2_score': 0.9563750545387479}",0.1,learning model for time-series,000:00:05
+ff7321f5-3d7f-4b96-a575-968d89a47d3b,1616102123.5177758,singapore,"{'rmse': 1754, 'mae': 417.38854800721873, 'r2_score': 0.6938197353950329}",0.1,learning model for time-series,000:00:02
+a66bcb11-3c3b-4bf5-a6aa-c038f6f8b9d5,1616102128.749089,spain,"{'rmse': 307, 'mae': 104.12446356206053, 'r2_score': 0.9082644775529413}",0.1,learning model for time-series,000:00:05
+44edb55a-ec85-4603-96a7-a2acf4612f2a,1616102134.530962,united_kingdom,"{'rmse': 25837, 'mae': 14725.848582053603, 'r2_score': 0.9073599756902471}",0.1,learning model for time-series,000:00:05

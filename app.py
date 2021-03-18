@@ -43,8 +43,20 @@ def predict():
         print("ERROR: API (predict): did not receive request data")
         return jsonify([])
 
-    if 'query' not in request.json:
-        print("ERROR API (predict): received request, but no 'query' found within")
+    if 'country' not in request.json:
+        print("ERROR API (predict): received request, but no 'country' found within")
+        return jsonify([])
+    
+    if 'year' not in request.json:
+        print("ERROR API (predict): received request, but no 'year' found within")
+        return jsonify([])
+    
+    if 'month' not in request.json:
+        print("ERROR API (predict): received request, but no 'month' found within")
+        return jsonify([])
+    
+    if 'day' not in request.json:
+        print("ERROR API (predict): received request, but no 'day' found within")
         return jsonify([])
 
     if 'type' not in request.json:
@@ -56,23 +68,35 @@ def predict():
     if 'mode' in request.json and request.json['mode'] == 'test':
         test = True
 
-    # extract the query
-    query = request.json['query']
+    # mount the query
+    query = {'country': str(request.json['country']),
+             'year': str(request.json['year']),
+             'month': str(request.json['month']),
+             'day': str(request.json['day'])
+            }
 
-    if request.json['type'] == 'dict':
-        pass
-    else:
-        print("ERROR API (predict): only dict data types have been implemented")
-        return jsonify([])
+    #if request.json['type'] == 'dict':
+    #    pass
+    #else:
+    #    print("ERROR API (predict): only dict data types have been implemented")
+    #    return jsonify([])
 
     # load model
-    _, model = model_load()
+    #_, model = model_load()
+    production_data_dir = os.path.join("data", "cs-production")
+    all_data, all_models = model_load(data_dir=production_data_dir)
 
-    if not model:
+    country = query['country']
+
+    if not all_models:
         print("ERROR: model is not available")
         return jsonify([])
 
-    _result = model_predict(query, test=test)
+    if country not in all_models.keys():
+        _result = {'ErrorMessage': "ERROR: model for country '{}' could not be found".format(country)}
+    else:
+        _result = model_predict(query, data=all_data[country], model=all_models[country], test=test)
+
     result = {}
 
     # convert numpy objects to ensure they are serializable
@@ -82,6 +106,7 @@ def predict():
         else:
             result[key] = item
 
+    print('predict end_point result: ', result)
     return jsonify(result)
 
 
@@ -102,6 +127,7 @@ def train():
     # set the test flag
     test = False
     if 'mode' in request.json and request.json['mode'] == 'test':
+        print('... test mode = true')
         test = True
 
     print("... training model")

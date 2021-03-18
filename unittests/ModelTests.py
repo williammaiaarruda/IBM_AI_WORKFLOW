@@ -33,7 +33,8 @@ class ModelTest(unittest.TestCase):
         """
 
         # train the model
-        all_models = model_load()
+        data_dir = os.path.join("data", "cs-train")
+        all_data, all_models = model_load(data_dir=data_dir)
         print(all_models)
         key = list(all_models.keys())[0]
 
@@ -46,15 +47,20 @@ class ModelTest(unittest.TestCase):
         """
 
         # ensure that a list can be passed
-        query = {'country': 'all',
-                 'year': '2020',
-                 'month': '01',
-                 'day': '05'
-                 }
-        result = model_predict(query, test=True)
+        country = 'all'
+        query = {'country': country,
+                'year': '2019',
+                'month': '11',
+                'day': '30'
+                }
+
+        production_data_dir = os.path.join("data", "cs-production")
+        all_data, all_models = model_load(data_dir=production_data_dir)
+        result = model_predict(query, data=all_data[country], model=all_models[country], test=True)
+        
         print(result)
         y_pred = result['y_pred']
-        self.assertTrue(y_pred >= -432.4092325822826)
+        self.assertTrue(y_pred >= 309858.7243333334)
 
 
 # Run the tests

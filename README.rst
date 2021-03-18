@@ -58,13 +58,19 @@ Train EndPoint
 
 .. code-block:: bash
 
+    Test Mode (Trains only two models)
+
     ~$ curl --header "Content-Type: application/json" --request POST --data '{"mode":"test"}'  http://localhost:8080/train
+
+    Full Mode (Trains all models)
+
+    ~$ curl --header "Content-Type: application/json" --request POST --data '{"mode":"full"}'  http://localhost:8080/train
 
 Predict EndPoint
 -----------------
 .. code-block:: bash
 
-    ~$ curl --header "Content-Type: application/json" --request POST --data '{"country": "all","year": "2020","month": "01","day": "05"}' http://localhost:8080/predict
+    ~$ curl --header "Content-Type: application/json" --request POST --data '{"country": "all","year": "2019","month": "11","day": "30"}' http://localhost:8080/predict
 
 
 To run the model directly
@@ -103,13 +109,6 @@ To run all of the tests
 .. code-block:: bash
 
     ~$ python run-tests.py
-
-Run Monitoring results
--------------------
-
-.. code-block:: bash
-
-    ~$ python monitoring.py
 
 To build the docker container
 --------------------------------

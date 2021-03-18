@@ -11,7 +11,6 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 
-
 COLORS = ["darkorange", "royalblue", "slategrey"]
 
 
@@ -211,13 +210,14 @@ class DataProcessing:
         dates = dates[mask]
         X.reset_index(drop=True, inplace=True)
 
-        if training:
-            # remove the last 30 days (because the target is not reliable)
-            mask = np.arange(X.shape[0]) < np.arange(X.shape[0])[-30]
-            X = X[mask]
-            y = y[mask]
-            dates = dates[mask]
-            X.reset_index(drop=True, inplace=True)
+        #if training and X.shape[0] > 30:
+        #    # remove the last 30 days (because the target is not reliable)
+        #    print('X.shape: ', X.shape)
+        #    mask = np.arange(X.shape[0]) < np.arange(X.shape[0])[-30]
+        #    X = X[mask]
+        #    y = y[mask]
+        #    dates = dates[mask]
+        #    X.reset_index(drop=True, inplace=True)
 
         return X, y, dates
 
