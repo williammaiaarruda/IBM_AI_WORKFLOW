@@ -8,7 +8,7 @@ Installing
 
 .. code-block:: bash
 
-    ~$ git clone https://github.com/PJarbas/ibm_ai_workflow.git
+    ~$ git clone https://github.com/williammaiaarruda/IBM_AI_WORKFLOW.git
     
     ~$ pip install -r requirements.txt
     
