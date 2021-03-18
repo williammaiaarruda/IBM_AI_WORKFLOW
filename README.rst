@@ -1,4 +1,4 @@
-Aavail time series revenue prediction
+Aavail revenue prediction
 =====================================
 
 .. image:: img/icon.png
@@ -44,11 +44,6 @@ http://localhost:8080/logs/train-test.log
 The logs files are in the logs folder
 
 Go to http://localhost:8080/ and you will see a basic website that can be customized for a project.
-
-Monitoring
------------
-The monitoring folder contains the files used by the monitoring script
-
 
 You can access the API EndPoints using curl command in a terminal
 ------------------------------------------------------------------
